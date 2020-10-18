@@ -1,5 +1,5 @@
 # Thanks for the original U-net code: https://github.com/milesial/Pytorch-UNet
-""" Lightest Unet @ C"""
+""" Lighter Unet """
 
 import torch
 import torch.nn as nn
@@ -7,11 +7,10 @@ import torch.nn.functional as F
 
 class depthwise_pointwise_conv(nn.Module):
 
-    def __init__(self, in_ch, out_ch, kernel_size, padding, channels_per_seg=128):
+    def __init__(self, in_ch, out_ch, kernel_size, padding):
         super(depthwise_pointwise_conv, self).__init__()
-
         self.conv = nn.Sequential(
-            nn.Conv2d(in_channels=in_ch, out_channels=in_ch, kernel_size=kernel_size, padding=padding, groups=in_ch//min(in_ch, channels_per_seg)),
+            nn.Conv2d(in_channels=in_ch, out_channels=in_ch, kernel_size=kernel_size, padding=padding, groups=in_ch),
             nn.Conv2d(in_channels=in_ch, out_channels=out_ch, kernel_size=1, padding=0, groups=1),
 
         )
@@ -28,7 +27,7 @@ class DoubleConv(nn.Module):
         if not mid_channels:
             mid_channels = out_channels
         self.double_conv = nn.Sequential(
-            depthwise_pointwise_conv(in_channels, mid_channels, kernel_size=3, padding=1),
+            nn.Conv2d(in_channels, mid_channels, kernel_size=3, padding=1),
             nn.BatchNorm2d(mid_channels),
             nn.ReLU(inplace=True),
             depthwise_pointwise_conv(mid_channels, out_channels, kernel_size=3, padding=1),
@@ -92,9 +91,10 @@ class OutConv(nn.Module):
     def forward(self, x):
         return self.conv(x)
 
-class Lighter_UNet(nn.Module):
+
+class Light_UNet(nn.Module):
     def __init__(self, n_channels, n_classes, bilinear=True):
-        super(Lighter_UNet, self).__init__()
+        super(Light_UNet, self).__init__()
         self.n_channels = n_channels
         self.n_classes = n_classes
         self.bilinear = bilinear

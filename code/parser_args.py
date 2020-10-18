@@ -11,8 +11,8 @@ def get_parser_with_args():
     
     parser.add_argument('-model',
                       type=str,
-                      default='lightest_unet',
-                      choices=['lighter_unet', 'lightest_unet'],
+                      default='light_unet',
+                      choices=['light_unet', 'lighter_unet'],
                       required=False,
                       help='choose model for training,for example unet.')
     
@@ -24,7 +24,7 @@ def get_parser_with_args():
     
     parser.add_argument('-min_epoch',
                       type=int,
-                      default=0,
+                      default=50,
                       required=False,
                       help='at least training min_epoch epochs.')
     
@@ -86,19 +86,19 @@ def get_parser_with_args():
     
     parser.add_argument('-train_dir',
                        type=str,
-                       default='/data/yingping/20191219)SegData/train',
+                       default='../data/train',
                        required=False,
                        help='data directory for training.')
     
     parser.add_argument('-val_dir',
                        type=str,
-                       default='/data/yingping/20191219)SegData/val',
+                       default='../data/val',
                        required=False,
                        help='data directory for validation.')
     
     parser.add_argument('-test_dir',
                        type=str,
-                       default='/data/yingping/20191219)SegData/test',
+                       default='../data/test',
                        required=False,
                        help='data directory for test.')
     
@@ -112,19 +112,7 @@ def get_parser_with_args():
                        type=str,
                        default='mask',
                        required=False,
-                       help='mask folder name.')
-    
-    parser.add_argument('-GT_folder',
-                       type=str,
-                       default='GT',
-                       required=False,
-                       help='Ground Truth folder name.')
-    
-    parser.add_argument('-contour_folder',
-                       type=str,
-                       default='contour',
-                       required=False,
-                       help='contour folder name.')
+                       help='Ground truth mask folder name.')
     
     parser.add_argument('-result_dir',
                        type=str,

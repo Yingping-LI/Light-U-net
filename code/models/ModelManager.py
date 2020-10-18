@@ -57,11 +57,11 @@ class ModelManager(object):
     Load models
     """    
     def load_model(self):
-        if self.opt.model=='lighter_unet':
-            model=Lighter_UNet(self.opt.num_channels,self.opt.num_classes).to(self.device)
+        if self.opt.model=='light_unet':
+            model=Light_UNet(self.opt.num_channels,self.opt.num_classes).to(self.device)
 
-        elif self.opt.model=='lightest_unet':
-            model=Lightest_UNet(self.opt.num_channels,self.opt.num_classes).to(self.device)
+        elif self.opt.model=='lighter_unet':
+            model=Lighter_UNet(self.opt.num_channels,self.opt.num_classes).to(self.device)
 
         else:
             raise Exception('Undifined model!')
@@ -78,7 +78,7 @@ class ModelManager(object):
             optimizer=optim.Adam(self.model.parameters(),lr=self.opt.lr, weight_decay=self.opt.weight_decay) 
 
         elif self.opt.optimizer=='SGD':
-            optimizer=optim.SGD(self.model.parameters(),lr=self.opt.lr)
+            optimizer=optim.SGD(self.model.parameters(),lr=self.opt.lr, weight_decay=self.opt.weight_decay)
 
         else:
             raise Exception('Undifined optimizer!')
@@ -258,11 +258,6 @@ class ModelManager(object):
         #calcute the metrics.
         mask_path=os.path.join(base_dir,self.opt.mask_folder)
         mean_metrics=calculate_metrics(pred_mask_path, mask_path)
-        
-        #save the contrast image(comparing the ground truth and predict mask).
-        GT_path=os.path.join(base_dir,self.opt.GT_folder)
-        contrast_GT_path=os.path.join(self.opt.result_dir,base_folder,'contrast_GT')
-        draw_contours(GT_path, pred_mask_path,contrast_GT_path)
         
         return mean_metrics
         
