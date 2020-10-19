@@ -1,26 +1,27 @@
 Light U-net for lesion segmentation in ultrasound images.
 =================
 
-## The repository consists: 
-1) code: Our Light U-net and Lighter U-net@C code for image segmentation.
-2) pretrained_models: Pretrained models on our ultrasound image data.
+## The repository includes: 
+1) code: Light U-net and Lighter U-net@C code for ultrasound image segmentation.
+2) pretrained_models: pretrained models on our ultrasound image data.
 
 
 ## 1.Code for Light U-net and Lighter U-net@C.
 
 ### 1.1 Different models:
 
+The general network architecture of U-net, Light U-net and Lighter U-net@C is shown as below, the differences lies in the definition of “Conv set 1” and “Conv set 2”.
 
 <div align=center><img width="700" height="500" src="general_network_architecture.png" alt="General network architecture for U-net, Light U-net and Lighter U-net"/></div>
 
-**Introducing depthwise separable convolution into U-net in different ways:**
 
-- **U-net:** “Conv set 1” and “Conv set 2” are regular 3 x 3 convolutions.
+**models:**
+
+- **U-net:** “Conv set 1” and “Conv set 2” correspond to regular 3 x 3 convolutions.
 
 - **Light U-net:** “Conv set 1” corresponds to regular 3 x 3 convolution while “Conv set 2” corresponds to depthwise separable convolution (C = 1).
 
-- **Lighter U-net @C:** Both “Conv set 1” and “Conv set 2” are intermediate modules with parameter C, where C \in {1; 2; 4; 8; 16; 32; 64; 128} and C = 1 represents depthwise
-separable convolutions. For the first layer with 3 channels, set C to 3 (except when C = 1). For other layers, choose the minimum value of C and the input channel
+- **Lighter U-net @C:** Both “Conv set 1” and “Conv set 2” correspond to intermediate modules with parameter C, where C \in {1; 2; 4; 8; 16; 32; 64; 128} and C = 1 represents depthwise separable convolutions. For the first layer with 3 channels, set C to 3 (except when C = 1). For other layers, choose the minimum value of C and the input channel
 number to implement the intermediate modules.
 
 Note that both “Conv set 1” and “Conv set 2” are applied with Batch Normalization and ReLU activation function.
@@ -30,9 +31,9 @@ Note that both “Conv set 1” and “Conv set 2” are applied with Batch Norm
 
 ### 2.2 Usage of the code:
 
-Set the hyperparameters in "parser_args.py" file, including the selected model, the data path et al., then run the following code to train the model and predict the segmentation.
+Set the hyperparameters in "parser_args.py" file, which includes the selected model, the data path, the image foler and et al., then run the following code to train the model and predict the segmentation.
 
-**Train the models:** 
+**Train the model:** 
 
 ```python train.py```
 
@@ -45,19 +46,23 @@ Set the hyperparameters in "parser_args.py" file, including the selected model, 
 ## 2. Information of the Pretrained models:
 
 ### 2.1 Data used for training the network:
-Ultrasound images with tumor lesions marked by eletronic calipers (blue cross in the images) by the radiologists, see more details in paper [5-6].
 
-Each patient has two ultrasound images taken in 2 mutual-orthogonal directions. We have 208 patients as training data, 70 patients as validation data.
-The results summarized in the following table are reported on the test data which consists of 70 patients.
+The data used follows the standardization of dynamic contrast-enhanced ultrasound (DCE-US) which is used for predicting outcomes of antiangiogenic therapy for solid
+tumors. More details can be found in [5, 6]. We only had access to part of the complete dataset in [5, 6], which corresponds to 348 patients from the original 539 patients.
+For each patient, two ultrasound images taken in 2 mutual-orthogonal directions at baseline (day=0) in the DCE-US examinations will be used. 
+For each image, the lesion location has been marked during the acquisition using electronic calipers (blue cross in the images) by experienced radiologists.
 
-The following images show two examples of the dataset. In each example, the blue cross is the eletronic calipers imposed by radiologists. The contour in red and in greeen correspond to the ground truth and the predicted lesion segmentation by our proposed Lighter U-net@128, separately. Dice Score (DC) is shown in upper right corner.
+The 348 patients are randomly split into three subsets: 208 patients as training data, 70 patients as validation data and 70
+patients as test data. The following images show two examples of the dataset. In each example, the blue cross is the eletronic calipers imposed by radiologists. The contour in red and in greeen correspond to the ground truth and the predicted lesion segmentation by our proposed Lighter U-net@128, separately. Dice Score (DC) is shown in upper right corner.
 
 ![Patient295_img2](Patient295_img2.png)![Patient307_img2](Patient307_img2.png)
 
 
 ### 2.2 Summary of the pretrained models:
 
-The model weights trained on ultrasound image data described in section 2.1 are uploaded in "pretrained_models" folder, and their performances on the test dataset are summarized as below:
+We train and tuning the network by our training and validation datasets, and the pre-trained models are uploaded in "pretrained_models" folder.
+Their performances on the test dataset, never seen by the network during training/validation process, are summarized as below:
+
 
 | Model                 | number of parameters    | pretrained model size     |  Dice Coefficient | 95% Hausdorff Distance|
 | ----------            | :-----------:  | :-----------: | :-----------: | :-----------: |
