@@ -60,7 +60,7 @@ patients as test data. The following images show two examples of the dataset. In
 
 ### 2.2 Summary of the pretrained models:
 
-We train and tuning the network by our training and validation datasets, and the pre-trained models are uploaded in "pretrained_models" folder.
+We train and tune the network by our training and validation datasets, and the pre-trained models are uploaded in "pretrained_models" folder.
 Their performances on the test dataset, never seen by the network during training/validation process, are summarized as below:
 
 
