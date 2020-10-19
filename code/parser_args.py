@@ -11,7 +11,7 @@ def get_parser_with_args():
     
     parser.add_argument('-model',
                       type=str,
-                      default='light_unet',
+                      default='lighter_unet',
                       choices=['light_unet', 'lighter_unet'],
                       required=False,
                       help='choose model for training,for example unet.')

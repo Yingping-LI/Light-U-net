@@ -10,8 +10,13 @@ class depthwise_pointwise_conv(nn.Module):
     def __init__(self, in_ch, out_ch, kernel_size, padding, channels_per_seg=128):
         super(depthwise_pointwise_conv, self).__init__()
 
+        if in_ch==3 and channels_per_seg!=1:
+            C=3
+        else:
+            C=min(in_ch, channels_per_seg)
+
         self.conv = nn.Sequential(
-            nn.Conv2d(in_channels=in_ch, out_channels=in_ch, kernel_size=kernel_size, padding=padding, groups=in_ch//min(in_ch, channels_per_seg)),
+            nn.Conv2d(in_channels=in_ch, out_channels=in_ch, kernel_size=kernel_size, padding=padding, groups=in_ch//C),
             nn.Conv2d(in_channels=in_ch, out_channels=out_ch, kernel_size=1, padding=0, groups=1),
 
         )
