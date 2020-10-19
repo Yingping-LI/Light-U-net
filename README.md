@@ -51,9 +51,8 @@ Each patient has two ultrasound images taken in 2 mutual-orthogonal directions. 
 The results summarized in the following table are reported on the test data which consists of 70 patients.
 
 The following images show two examples of the dataset. In each example, the blue cross is the eletronic calipers imposed by radiologists. The contour in red and in greeen correspond to the ground truth and the predicted lesion segmentation by our proposed Lighter U-net@128, separately. Dice Score (DC) is shown in upper right corner.
-<center class="half">
-    <img src="Patient295_img2.png" width="500"/><img src="Patient307_img2.png" width="500"/>
-</center>
+
+![Patient295_img2](Patient295_img2.png)![Patient307_img2](Patient307_img2.png)
 
 
 ### 2.2 Summary of the pretrained models:
