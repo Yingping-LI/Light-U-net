@@ -7,11 +7,13 @@ Light U-net for lesion segmentation in ultrasound images.
 
 
 ## 1.Code for Light U-net and Lighter U-net@C.
-Introducing depthwise separable convolution into U-net in different ways.
+
+### 1.1 Different models:
+
 
 <div align=center><img width="700" height="500" src="general_network_architecture.png" alt="General network architecture for U-net, Light U-net and Lighter U-net"/></div>
 
-**Different models:**
+**Introducing depthwise separable convolution into U-net in different ways:**
 
 - **U-net:** “Conv set 1” and “Conv set 2” are regular 3 x 3 convolutions.
 
@@ -26,9 +28,11 @@ Note that both “Conv set 1” and “Conv set 2” are applied with Batch Norm
 
 
 
-### Usage:
+### 2.2 Usage of the code:
 
-**Train the models:** set the hyperparameters in "parser_args.py" file, including the selected model, the data path et al., then run the following code to train the model.
+Set the hyperparameters in "parser_args.py" file, including the selected model, the data path et al., then run the following code to train the model and predict the segmentation.
+
+**Train the models:** 
 
 ```python train.py```
 
@@ -46,7 +50,7 @@ Ultrasound images with tumor lesions marked by eletronic calipers (blue cross in
 Each patient has two ultrasound images taken in 2 mutual-orthogonal directions. We have 208 patients as training data, 70 patients as validation data.
 The results summarized in the following table are reported on the test data which consists of 70 patients.
 
-The following images show two data examples of the data. In each example, the blue cross is the eletronic calipers imposed by radiologists. The contour in red and in greeen correspond to the ground truth and the predicted lesion segmentation by our proposed Lighter U-net@128, separately. Dice Score (DC) is shown in upper right corner.
+The following images show two examples of the dataset. In each example, the blue cross is the eletronic calipers imposed by radiologists. The contour in red and in greeen correspond to the ground truth and the predicted lesion segmentation by our proposed Lighter U-net@128, separately. Dice Score (DC) is shown in upper right corner.
 <center class="half">
     <img src="Patient295_img2.png" width="500"/><img src="Patient307_img2.png" width="500"/>
 </center>
