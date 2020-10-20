@@ -1,9 +1,9 @@
 Light U-net for lesion segmentation in ultrasound images.
 =================
 
-## The repository includes: 
-1) code: Light U-net and Lighter U-net@C code for ultrasound image segmentation.
-2) pretrained_models: pretrained models on our ultrasound image data.
+## The repository includes two subfolders: 
+- code: Light U-net and Lighter U-net@C code for ultrasound image segmentation.
+- pretrained_models: pretrained models on the ultrasound image dataset from [5].
 
 
 ## 1.Code for Light U-net and Lighter U-net@C.
@@ -47,21 +47,21 @@ Set the hyperparameters in "parser_args.py" file, which includes the selected mo
 
 ### 2.1 Data used for training the network:
 
-The data used follows the standardization of dynamic contrast-enhanced ultrasound (DCE-US) which is used for predicting outcomes of antiangiogenic therapy for solid
+The dataset follows the standardization of dynamic contrast-enhanced ultrasound (DCE-US) which is used for predicting outcomes of antiangiogenic therapy for solid
 tumors. More details can be found in [5, 6]. We only had access to part of the complete dataset in [5, 6], which corresponds to 348 patients from the original 539 patients.
 For each patient, two ultrasound images taken in 2 mutual-orthogonal directions at baseline (day=0) in the DCE-US examinations will be used. 
 For each image, the lesion location has been marked during the acquisition using electronic calipers (blue cross in the images) by experienced radiologists.
 
-The 348 patients are randomly split into three subsets: 208 patients as training data, 70 patients as validation data and 70
-patients as test data. The following images show two examples of the dataset. In each example, the blue cross is the eletronic calipers imposed by radiologists. The contour in red and in greeen correspond to the ground truth and the predicted lesion segmentation by our proposed Lighter U-net@128, separately. Dice Score (DC) is shown in upper right corner.
+The 348 patients are randomly split into three subsets: 208 patients as training set, 70 patients as validation set and 70
+patients as test set. The images displayed below show two examples of images within the test set. In each example, the blue cross is an electronic caliper drawn by radiologists during acquisition. The contours in red and in greeen correspond to the ground truth annotated by an expert radiologist, and the predicted lesion segmentation by our proposed Lighter U-net@128, respectively. Dice Score (DC) is shown in upper right corner.
 
 ![Patient295_img2](Patient295_img2.png)![Patient307_img2](Patient307_img2.png)
 
 
 ### 2.2 Summary of the pretrained models:
 
-We train and tune the network by our training and validation datasets, and the pre-trained models are uploaded in "pretrained_models" folder.
-Their performances on the test dataset, never seen by the network during training/validation process, are summarized as below:
+We train and tune the networks using training and validation sets. The pre-trained models are uploaded in "pretrained_models" folder.
+Their performance on the test dataset, never seen by the network during training/validation process, are summarized as below:
 
 
 | Model                 | number of parameters    | pretrained model size     |  Dice Coefficient | 95% Hausdorff Distance|
