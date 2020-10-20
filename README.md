@@ -15,7 +15,7 @@ The general network architecture of U-net, Light U-net and Lighter U-net@C is sh
 <div align=center><img width="700" height="500" src="general_network_architecture.png" alt="General network architecture for U-net, Light U-net and Lighter U-net"/></div>
 
 
-**models:**
+**Models:**
 
 - **U-net:** “Conv set 1” and “Conv set 2” correspond to regular 3 x 3 convolutions.
 
