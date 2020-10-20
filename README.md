@@ -8,14 +8,12 @@ Light U-net for lesion segmentation in ultrasound images.
 
 ## 1.Code for Light U-net and Lighter U-net@C.
 
-### 1.1 Different models:
+### 1.1 Models architecture:
 
 The general network architecture of U-net, Light U-net and Lighter U-net@C is shown as below, the differences lies in the definition of “Conv set 1” and “Conv set 2”.
 
 <div align=center><img width="700" height="500" src="general_network_architecture.png" alt="General network architecture for U-net, Light U-net and Lighter U-net"/></div>
 
-
-**Models:**
 
 - **U-net:** “Conv set 1” and “Conv set 2” correspond to regular 3 x 3 convolutions.
 
@@ -43,9 +41,9 @@ Set the hyperparameters in "parser_args.py" file, which includes the selected mo
 
 
 
-## 2. Information of the Pretrained models:
+## 2. Pretrained models:
 
-### 2.1 Data used for training the network:
+### 2.1 Dataset used for training the networks:
 
 The dataset follows the standardization of dynamic contrast-enhanced ultrasound (DCE-US) which is used for predicting outcomes of antiangiogenic therapy for solid
 tumors. More details can be found in [5, 6]. We only had access to part of the complete dataset in [5, 6], which corresponds to 348 patients from the original 539 patients.
@@ -58,7 +56,7 @@ patients as test set. The images displayed below show two examples of images wit
 ![Patient295_img2](Patient295_img2.png)![Patient307_img2](Patient307_img2.png)
 
 
-### 2.2 Summary of the pretrained models:
+### 2.2 Performance of the pretrained models:
 
 We train and tune the networks using training and validation sets. The pre-trained models are uploaded in "pretrained_models" folder.
 Their performance on the test dataset, never seen by the network during training/validation process, are summarized as below:
