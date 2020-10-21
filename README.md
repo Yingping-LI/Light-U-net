@@ -19,8 +19,8 @@ The general network architecture of U-net, Light U-net and Lighter U-net@C is sh
 
 - **Light U-net:** “Conv set 1” corresponds to regular 3 x 3 convolution while “Conv set 2” corresponds to depthwise separable convolution (C = 1).
 
-- **Lighter U-net @C:** Both “Conv set 1” and “Conv set 2” correspond to intermediate modules with parameter C, where C \in {1; 2; 4; 8; 16; 32; 64; 128} and C = 1 represents depthwise separable convolutions. For the first layer with 3 channels, set C to 3 (except when C = 1). For other layers, choose the minimum value of C and the input channel
-number to implement the intermediate modules.
+- **Lighter U-net @C:** Both “Conv set 1” and “Conv set 2” correspond to group convolution with group size C, where C \in {1; 2; 4; 8; 16; 32; 64; 128} and C = 1 represents depthwise separable convolutions. For the first layer with 3 channels, set C to 3 (except when C = 1). For other layers, choose the minimum value of C and the input channel
+number as the final group size.
 
 Note that both “Conv set 1” and “Conv set 2” are applied with Batch Normalization and ReLU activation function.
 
@@ -93,6 +93,7 @@ techniques study,” Investigative Radiology, vol. 47, no. 12, pp. 711–716, 20
 outcomes of antiangiogenic therapy for solid tumors: the french multicenter support for innovative and expensive
 techniques study,” Investigative Radiology, vol. 49, no. 12, pp. 794, 2014.
 
+[7] N. K. Jha,  R. Saini,  S. Nag,  and S. Mittal,   “E2gc:  Energy-efficient  group  convolution  in  deep  neural  networks,”in2020 33rd International Conference on VLSI Design and 202019th International Conference on Embedded Systems (VLSID).IEEE, 2020, pp. 155–160.
 
 
 
